@@ -2,24 +2,40 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Jeu des 7 différences </title>
+        <link rel="stylesheet" href="style.css">
     </head>
-    <body>
-        <h1>Jeu des 7 différences</h1>
-        <p>Observe les deux images suivantes et essaie de trouver les 7 différences</p>
-        <!--l'image a droite-->
-        <img src="image1.jpg" alt="image originale">
-        <!--limage a gauche-->
-        <img src="image2.jpg" usemap="#differences" alt="image modifiée">
-        <map name ="differences">
-            <area shape="circle" coords="10,20,30" href="#" alt="difference1">
-            <area shape="circle" coords="10,20,30" href="#" alt="difference2">
-            <area shape="circle" coords="10,20,30" href="#" alt="difference3">
-            <area shape="circle" coords="10,20,30" href="#" alt="difference4">
-            <area shape="circle" coords="10,20,30" href="#" alt="difference5">
-            <area shape="circle" coords="10,20,30" href="#" alt="difference6">
-            <area shape="circle" coords="10,20,30" href="#" alt="difference7">
-        </map>
-
+    <body class="hp-theme">
+        <header>
+            <h1>Jeu des 7 différences</h1>
+            <p>Observe les deux images suivantes et essaie de trouver les 7 différences</p>
+        </header>
+        <main>
+            <div class="images-container">
+                <figure>
+                    <!--l'image a droite-->
+                    <img src="image1.jpg" alt="image originale">
+                    <figcaption>Image originale</figcaption>
+                </figure>
+                <figure>
+                    <!--limage a gauche-->
+                    <img src="image2.jpg" usemap="#differences" alt="image modifiée">
+                    <figcaption>Image modifiée</figcaption>
+                    <map name="differences">
+                        <area shape="circle" coords="10,20,30" href="#" alt="Différence 1">
+                        <area shape="circle" coords="50,80,30" href="#" alt="Différence 2">
+                        <area shape="circle" coords="120,60,30" href="#" alt="Différence 3">
+                        <area shape="circle" coords="160,120,30" href="#" alt="Différence 4">
+                        <area shape="circle" coords="200,150,30" href="#" alt="Différence 5">
+                        <area shape="circle" coords="250,200,30" href="#" alt="Différence 6">
+                        <area shape="circle" coords="300,220,30" href="#" alt="Différence 7">
+                    </map>
+                </figure>
+            </div>
+        </main>
+        <footer>
+            <p>Bonne chance, jeune sorcier 🪄</p>
+        </footer>
     </body>
 </html>
