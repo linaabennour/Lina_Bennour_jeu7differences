@@ -1,41 +1,69 @@
 <!doctype html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Jeu des 7 différences </title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body class="hp-theme">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu des 7 différences — Harry Houses</title>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="gryffindor">
+    <section id="start-screen">
+        <h1>Jeu des 7 différences</h1>
+        <p class="intro">Choisis ta Maison et ton niveau, puis commence l’aventure 🪄</p>
+
+        <div id="house-select">
+            <h3>Choisis ta Maison :</h3>
+            <button class="house-btn" data-house="gryffindor">🦁 Gryffondor</button>
+            <button class="house-btn" data-house="slytherin">🐍 Serpentard</button>
+            <button class="house-btn" data-house="ravenclaw">🦅 Serdaigle</button>
+            <button class="house-btn" data-house="hufflepuff">🦡 Poufsouffle</button>
+        </div>
+
+        <div id="level-select">
+            <h3>Choisis le niveau :</h3>
+            <button class="level-btn" data-level="facile">Facile</button>
+            <button class="level-btn" data-level="moyen">Moyen</button>
+            <button class="level-btn" data-level="difficile">Difficile</button>
+        </div>
+
+        <button id="start-btn" class="start">Commencer</button>
+    </section>
+    <main id="game" style="display:none;">
         <header>
-            <h1>Jeu des 7 différences</h1>
-            <p>Observe les deux images suivantes et essaie de trouver les 7 différences</p>
+            <h1 id="game-title">Jeu des 7 différences</h1>
+            <p id="instructions">Trouve les 7 différences</p>
         </header>
-        <main>
-            <div class="images-container">
-                <figure>
-                    <!--l'image a droite-->
-                    <img src="image1.jpg" alt="image originale">
-                    <figcaption>Image originale</figcaption>
-                </figure>
-                <figure>
-                    <!--limage a gauche-->
-                    <img src="image2.jpg" usemap="#differences" alt="image modifiée">
-                    <figcaption>Image modifiée</figcaption>
-                    <map name="differences">
-                        <area shape="circle" coords="10,20,30" href="#" alt="Différence 1">
-                        <area shape="circle" coords="50,80,30" href="#" alt="Différence 2">
-                        <area shape="circle" coords="120,60,30" href="#" alt="Différence 3">
-                        <area shape="circle" coords="160,120,30" href="#" alt="Différence 4">
-                        <area shape="circle" coords="200,150,30" href="#" alt="Différence 5">
-                        <area shape="circle" coords="250,200,30" href="#" alt="Différence 6">
-                        <area shape="circle" coords="300,220,30" href="#" alt="Différence 7">
-                    </map>
-                </figure>
-            </div>
-        </main>
-        <footer>
-            <p>Bonne chance, jeune sorcier 🪄</p>
-        </footer>
-    </body>
+
+        <div id="hud">
+            <p id="timer"> Temps : 0s</p>
+            <p id="errors"> Erreurs : 0</p>
+            <p id="lives"> Vies : 5</p>
+            <button id="restartBtn">Recommencer</button>
+        </div>
+
+        <div class="images-container">
+            <figure>
+                <img id="img1" src="" alt="image originale">
+                <figcaption>Image originale</figcaption>
+            </figure>
+
+            <figure>
+                <img id="img2" src="" usemap="#differences" alt="image modifiée">
+                <figcaption>Image modifiée</figcaption>
+                <map name="differences" id="map-area"></map>
+            </figure>
+        </div>
+    </main>
+
+    <div id="popup" style="display:none;">
+        <div class="popup-content">
+            <h2 id="popup-title"></h2>
+            <p id="popup-text"></p>
+            <button id="popup-btn">OK</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
 </html>
