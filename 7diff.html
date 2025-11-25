@@ -10,6 +10,12 @@
 
 <body class="gryffindor">
     <section id="start-screen">
+        <header class="top-buttons">
+            <button id="shopBtnStart">🛒 Magasin</button>
+            <button id="rulesBtn">📜 Règles</button>
+            <button id="optionsBtn">⚙️ Options</button>
+        </header>
+
         <h1>Jeu des 7 différences</h1>
         <p class="intro">Choisis ta Maison et ton niveau, puis commence l’aventure 🪄</p>
 
@@ -28,7 +34,20 @@
             <button class="level-btn" data-level="difficile">Difficile</button>
         </div>
 
-        <button id="start-btn" class="start">Commencer</button>
+        <div class="start-actions">
+            <button id="start-btn" class="start">▶ Jouer</button>
+        </div>
+        <div id="rules" class="panel" style="display:none;">
+            <h3>Règles</h3>
+            <p>Trouve les 7 différences entre les deux images. Attention aux erreurs : tu as un nombre limité de vies. Gagne des pièces en trouvant des différences pour acheter des objets au magasin.</p>
+            <button class="close-panel">Fermer</button>
+        </div>
+
+        <div id="options" class="panel" style="display:none;">
+            <h3>Options</h3>
+            <p>Volume , thèmes et préférences.</p>
+            <button class="close-panel">Fermer</button>
+        </div>
     </section>
     <main id="game" style="display:none;">
         <header>
@@ -38,9 +57,11 @@
 
         <div id="hud">
             <p id="timer"> Temps : 0s</p>
-            <p id="errors"> Erreurs : 0</p>
             <p id="lives"> Vies : 5</p>
+            <p id="found">Différences trouvées : 0 / 7</p>
+            <p class="coins-display">Pièces : <span id="coins">0</span> 🪙</p>
             <button id="restartBtn">Recommencer</button>
+            <button id="shopBtn">Magasin 🛒</button>
         </div>
 
         <div class="images-container">
@@ -56,7 +77,6 @@
             </figure>
         </div>
     </main>
-
     <div id="popup" style="display:none;">
         <div class="popup-content">
             <h2 id="popup-title"></h2>
@@ -64,6 +84,35 @@
             <button id="popup-btn">OK</button>
         </div>
     </div>
+    <div id="shop" style="display:none;">
+        <div class="shop-content">
+            <h2>Magasin d’objets magiques</h2>
+            <p class="coins-display">Pièces : <span id="coinsShop">0</span> 🪙</p>
+
+            <div class="shop-items">
+                <div class="item">
+                    <h3>❤️ Vie supplémentaire</h3>
+                    <p>Prix : 20 🪙</p>
+                    <button class="buy-btn" data-item="life">Acheter</button>
+                </div>
+
+                <div class="item">
+                    <h3>✨ Indice</h3>
+                    <p>Prix : 35 🪙</p>
+                    <button class="buy-btn" data-item="hint">Acheter</button>
+                </div>
+
+                <div class="item">
+                    <h3>⏱️ +10 secondes</h3>
+                    <p>Prix : 25 🪙</p>
+                    <button class="buy-btn" data-item="time">Acheter</button>
+                </div>
+            </div>
+
+            <button id="closeShop">Fermer</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
