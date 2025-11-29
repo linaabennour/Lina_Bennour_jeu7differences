@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu des 7 différences — Harry Houses</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cormorant+Garamond:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Fichier CSS du jeu -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="gryffindor">
+    <audio id="click-sound" src="click.mp3" preload="auto"></audio>
+
+    <!--  ÉCRAN DE DÉPART -->
+    <section id="start-screen">
+
+        <!-- Boutons en haut : Magasin, Règles, Options -->
+        <header class="top-buttons">
+            <button id="shopBtnStart">🛒 Magasin</button>
+            <button id="rulesBtn">📜 Règles</button>
+            <button id="optionsBtn">⚙️ Options</button>
+        </header>
+        <h1>Jeu des 7 différences</h1>
+        <p class="intro">Choisis ta Maison et ton niveau, puis commence l’aventure 🪄</p>
+
+        <!-- Choix de la Maison -->
+        <div id="house-select">
+            <h3>Choisis ta Maison :</h3>
+            <button class="house-btn" data-house="gryffindor">🦁 Gryffondor</button>
+            <button class="house-btn" data-house="slytherin">🐍 Serpentard</button>
+            <button class="house-btn" data-house="ravenclaw">🦅 Serdaigle</button>
+            <button class="house-btn" data-house="hufflepuff">🦡 Poufsouffle</button>
+        </div>
+
+        <!-- Choix du niveau de difficulté -->
+        <div id="level-select">
+            <h3>Choisis le niveau :</h3>
+            <button class="level-btn" data-level="facile">Facile</button>
+            <button class="level-btn" data-level="moyen">Moyen</button>
+            <button class="level-btn" data-level="difficile">Difficile</button>
+        </div>
+
+        <!-- Bouton pour lancer la partie -->
+        <div class="start-actions">
+            <button id="start-btn" class="start">▶ Jouer</button>
+        </div>
+
+        <!-- Panneau des règles (caché au début) -->
+        <div id="rules" class="panel" style="display:none;">
+            <h3>Règles</h3>
+            <p>Trouve les 7 différences entre les deux images. 
+                Attention aux erreurs : tu as un nombre limité de vies.
+                Gagne des pièces en trouvant des différences pour acheter des objets au magasin.</p>
+            <button class="close-panel">Fermer</button>
+        </div>
+    </section>
+
+    <!--  ZONE PRINCIPALE DU JEU -->
+    <main id="game" style="display:none;">
+        <header>
+            <h1 id="game-title">Jeu des 7 différences</h1>
+            <p id="instructions">Trouve les 7 différences</p>
+        </header>
+
+        <!--  Timer, vies, pièces, etc. -->
+        <div id="hud">
+            <p id="timer">Temps : 0s</p>
+            <p id="lives">Vies : 5</p>
+            <p id="found">Différences trouvées : 0 / 7</p>
+            <p class="coins-display">Pièces : <span id="coins">0</span> 🪙</p>
+
+            <!-- Boutons du HUD -->
+            <button id="restartBtn">Recommencer</button>
+            <button id="shopBtn">Magasin 🛒</button>
+        </div>
+
+        <!-- Zone des 2 images -->
+        <div class="images-container">
+
+            <!-- Image originale -->
+            <figure>
+                <img id="img1" src="" alt="image originale">
+                <figcaption>Image originale</figcaption>
+            </figure>
+
+            <!-- Image modifiée + zones cliquables -->
+            <figure>
+                <div class="game-image-wrapper">
+                    <img id="img2" src="" alt="image modifiée">
+
+                    <!-- Zones cliquables générées via JS -->
+                    <div id="map-area"></div>
+                </div>
+                <figcaption>Image modifiée</figcaption>
+            </figure>
+        </div>
+    </main>
+
+    <!--  POPUP GÉNÉRIQUE (fin de partie, message, etc.) -->
+    <div id="popup" style="display:none;">
+        <div class="popup-content"
+            style="background:url('parchment.jpg'); border:4px solid #5c3b0c; border-radius:12px; padding:25px;">
+            <h2 id="popup-title"></h2>
+            <p id="popup-text"></p>
+            <button id="popup-btn">OK</button>
+        </div>
+    </div>
+
+    <!--  MAGASIN -->
+    <div id="shop" style="display:none;">
+        <div class="shop-content"
+            style="background:url('parchment.jpg'); border:4px solid #5c3b0c; border-radius:12px; padding:25px; max-width:420px; margin:auto;">
+
+            <h2>Magasin d’objets magiques</h2>
+
+            <!-- Affichage des pièces -->
+            <p class="coins-display">Pièces : <span id="coinsShop">0</span> 🪙</p>
+
+            <!-- Liste des objets à acheter -->
+            <div class="shop-items">
+
+                <!-- Acheter une vie -->
+                <div class="item">
+                    <h3>❤️ Vie supplémentaire</h3>
+                    <p>Prix : 20 🪙</p>
+                    <button class="buy-btn" data-item="life">Acheter</button>
+                </div>
+
+                <!-- Acheter un indice -->
+                <div class="item">
+                    <h3>✨ Indice</h3>
+                    <p>Prix : 35 🪙</p>
+                    <button class="buy-btn" data-item="hint">Acheter</button>
+                </div>
+
+                <!-- Acheter -10 secondes -->
+                <div class="item">
+                    <h3>⏱️ -10 secondes</h3>
+                    <p>Prix : 25 🪙</p>
+                    <button class="buy-btn" data-item="time">Acheter</button>
+                </div>
+            </div>
+
+            <button id="closeShop">Fermer</button>
+        </div>
+    </div>
+
+    <!--  OPTIONS DU JEU -->
+    <div id="options" class="panel"
+        style="display:none; background:url('parchment.jpg'); border:4px solid #5c3b0c; border-radius:12px; padding:25px; max-width:400px; margin:auto; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2500;">
+
+        <h2>Options</h2>
+
+        <!-- Activer / Désactiver son -->
+        <label>
+            <input type="checkbox" id="toggle-sound" checked> Activer le son
+        </label>
+
+        <!-- Volume -->
+        <br>
+        <label for="volume-control">Volume :</label>
+        <input type="range" id="volume-control" min="0" max="100" value="100">
+
+        <!-- Autres options -->
+        <div style="margin-top:10px; text-align:left;">
+            <label><input type="checkbox" id="toggle-spark" checked> Animations sparks</label>
+        </div>
+
+        <div style="margin-top:10px; text-align:left;">
+            <label><input type="checkbox" id="toggle-hint" checked> Hints animés</label>
+        </div>
+
+        <!-- Vitesse du timer -->
+        <div style="margin-top:10px; text-align:left;">
+            <label>Vitesse du timer :
+                <select id="timer-speed">
+                    <option value="1000" selected>Normale</option>
+                    <option value="500">Rapide</option>
+                    <option value="2000">Lente</option>
+                </select>
+            </label>
+        </div>
+
+        <!-- Bouton de fermeture -->
+        <div style="margin-top:15px; text-align:center;">
+            <button class="close-panel">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Script principal du jeu -->
+    <script src="script.js"></script>
+</body>
+
+</html>

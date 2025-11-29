@@ -1,24 +1,76 @@
+/*  STYLE GLOBAL DU BODY */
 body {
     margin: 0;
     padding: 30px;
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Cormorant Garamond", serif; /* Police principale */
     font-size: 20px;
     text-align: center;
-    color: #2b1b09;
+    color: #2b1b09; /* Couleur texte par défaut */
+
+    /* Dégradé magique pour le fond */
+    background: radial-gradient(circle at top, #2b0000, #100000);
+
+    /* Animation du fond qui bouge lentement */
+    background-size: 200% 200%;
+    animation: bgPulse 10s infinite alternate;
+
+    overflow: auto;
+}
+/* EFFETS DE MAGIE EN ARRIÈRE-PLAN */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("HP.png");
+    opacity: 0.15;
+    pointer-events: none;
+    animation: floatStars 25s linear infinite;
+    z-index: -1;
 }
 
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 220, 130, 0.05), transparent 70%);
+    pointer-events: none;
+    animation: magicGlow 8s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+/* Animation du fond pulsé */
+@keyframes bgPulse {
+    0% { background-position: 50% 0%; }
+    100% { background-position: 50% 20%; }
+}
+
+/* TITRES (H1, H2, H3) */
 h1, h2, h3 {
-    font-family: "MedievalSharp", cursive;
+    font-family: "MedievalSharp", cursive; /* Police style Harry Potter */
     letter-spacing: 1px;
 }
 
-h1 { font-size: 42px; margin-bottom: 10px; }
-h3 { font-size: 26px; }
+h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
 
-.intro { font-size: 22px; margin-bottom: 20px; }
+h3 {
+    font-size: 26px;
+}
 
-#start-screen { max-width: 900px; margin: auto; }
+.intro {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
 
+/* ÉCRAN DE DÉPART */
+#start-screen {
+    max-width: 900px;
+    margin: auto;
+}
+
+/* BOUTONS */
 button {
     cursor: pointer;
     background: #7a5c2e;
@@ -31,24 +83,39 @@ button {
     transition: 0.15s;
 }
 
-button:hover { transform: scale(1.03); }
+button:hover {
+    transform: scale(1.03);
+}
 
-.house-btn, .level-btn { margin: 8px; }
+/* Boutons maison & niveaux */
+.house-btn, .level-btn {
+    margin: 8px;
+}
 
-.start-actions { margin-top: 18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+/* Alignement des boutons principaux */
+.start-actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
+/* PANELS (options, règles…)*/
 .panel {
     margin-top: 16px;
     padding: 12px;
     border: 3px solid #7a5c2e;
-    background: rgba(255,239,199,0.9);
+    background: rgba(255, 239, 199, 0.95);
     border-radius: 10px;
     max-width: 760px;
     margin-left: auto;
     margin-right: auto;
-    text-align:left;
+    text-align: left;
+    color: #2b1b09;
 }
 
+/* IMAGES DU JEU */
 .images-container {
     display: flex;
     justify-content: center;
@@ -58,15 +125,27 @@ button:hover { transform: scale(1.03); }
 }
 
 figure {
-    border: 4px solid #7a5c2e;
-    padding: 14px;
+    border: 5px solid #7a5c2e;
+    padding: 20px;
     border-radius: 10px;
     background: rgba(255, 239, 199, 0.9);
     box-shadow: 0 0 20px rgba(123, 83, 28, 0.4);
+    position: relative;
 }
 
-img { width: 350px; border-radius: 8px; }
+/* Images cliquables */
+img {
+    width: 500px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
+img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px gold;
+}
+
+/* HUD (timer, vies, pièces…)*/
 #hud {
     display: flex;
     justify-content: center;
@@ -76,13 +155,15 @@ img { width: 350px; border-radius: 8px; }
     align-items: center;
 }
 
+/* POPUP (messages fin de partie, achats…)*/
 #popup {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 3000;
 }
 
 .popup-content {
@@ -92,37 +173,28 @@ img { width: 350px; border-radius: 8px; }
     border: 4px solid #5c3b0c;
     border-radius: 12px;
     font-family: "MedievalSharp";
+    text-align: center;
+    color: #2b1b09;
 }
 
-.coins-display { font-weight: 700; }
+.coins-display {
+    font-weight: 700;
+}
 
+/* THÈMES DES MAISONS (couleurs du fond)*/
 body.gryffindor {
     background: linear-gradient(#3a0000, #7a0000);
     color: #ffdf9a;
 }
 
-body.gryffindor #shop .shop-content,
-body.gryffindor .panel {
-    color: #3a0000;
-    background: rgba(255, 239, 199, 0.95);
-}
 body.slytherin {
     background: linear-gradient(#001a0f, #003822);
     color: #cfffe6;
 }
-body.slytherin #shop .shop-content,
-body.slytherin .panel {
-    color: #003822;
-    background: rgba(255, 239, 199, 0.95);
-}
+
 body.ravenclaw {
     background: linear-gradient(#0b1b3b, #142b5f);
     color: #dfeaff;
-}
-body.ravenclaw #shop .shop-content,
-body.ravenclaw .panel {
-    color: #0b1b3b;
-    background: rgba(255, 239, 199, 0.95);
 }
 
 body.hufflepuff {
@@ -130,28 +202,62 @@ body.hufflepuff {
     color: #7a5c00;
 }
 
+/* EFFET DE SPARK (étincelles lorsque tu cliques)*/
 .spark {
     position: absolute;
-    width: 55px;
-    height: 55px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, gold, transparent);
+    animation: sparkle 0.6s forwards;
 }
 
+/* Couleurs selon maison */
 .spark.gryffindor { box-shadow: 0 0 20px #ffbf00; border: 4px solid #ffcf6a; }
-.spark.slytherin  { box-shadow: 0 0 20px #00ff88; border: 4px solid #a8ffd0; }
-.spark.ravenclaw  { box-shadow: 0 0 20px #87b4ff; border: 4px solid #cfe0ff; }
+.spark.slytherin { box-shadow: 0 0 20px #00ff88; border: 4px solid #a8ffd0; }
+.spark.ravenclaw { box-shadow: 0 0 20px #87b4ff; border: 4px solid #cfe0ff; }
 .spark.hufflepuff { box-shadow: 0 0 20px #ffd75e; border: 4px solid #ffe59e; }
 
-@media (max-width: 800px) {
-    img { width: 260px; }
+/* Animation des étincelles */
+@keyframes sparkle {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(2.5); opacity: 0; }
 }
 
+/* CONTENEUR IMAGE + ZONES CLIQUABLES */
+.game-image-wrapper {
+    position: relative; /* nécessaire pour placer les zones */
+    display: inline-block;
+    line-height: 0;
+}
+
+/* Carte cliquable (zones des différences) */
+#map-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* les clics ratés passent à travers */
+}
+
+/* Zones cliquables */
+.click-zone {
+    background: rgba(255, 0, 0, 0);
+    position: absolute;
+    pointer-events: auto; /* capture les clics réels */
+}
+
+.click-zone.hint {
+    border: 3px solid yellow !important;
+    background: rgba(255, 255, 0, 0.3) !important;  /* highlight lors d'un indice */
+}
+
+/*  MAGASIN */
 #shop {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,6 +272,7 @@ body.hufflepuff {
     width: 420px;
     font-family: "MedievalSharp";
     text-align: center;
+    color: #2b1b09;
 }
 
 .shop-items {
@@ -178,13 +285,14 @@ body.hufflepuff {
 .item {
     padding: 12px;
     border: 3px solid #7a5c2e;
-    background: rgba(255,239,199,0.8);
+    background: rgba(255, 239, 199, 0.9);
     border-radius: 10px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+/* BOUTONS FIXÉS EN HAUT À DROITE (règles, options…)*/
 .top-buttons {
     position: fixed;
     top: 15px;
@@ -194,16 +302,53 @@ body.hufflepuff {
     z-index: 2000;
 }
 
-.top-buttons button {
-    padding: 8px 14px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #7a5c2e;
-    color: white;
-    border: none;
-    font-family: "MedievalSharp";
-    transition: 0.15s;
+.top-buttons button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px gold;
 }
 
-.top-buttons button:hover { transform: scale(1.03); }
+/* PANELS ANIMÉS (règles / options) */
+.panel {
+    display: none;
+    background: url('parchment.jpg');
+    border: 4px solid #5c3b0c;
+    border-radius: 12px;
+    padding: 25px;
+
+    /* Animation apparence */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5) rotate(-5deg);
+    opacity: 0;
+
+    z-index: 2500;
+    box-shadow: 0 0 30px gold;
+    transition: all 0.6s ease-out;
+    color: #2b1b09;
+}
+
+.panel.show {
+    display: block;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+}
+
+/* Effet étoiles qui défilent */
+@keyframes floatStars {
+    from { background-position: 0 0; }
+    to { background-position: 0 1000px; }
+}
+
+/* Aura lumineuse */
+@keyframes magicGlow {
+    0% { opacity: 0.05; }
+    100% { opacity: 0.18; }
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 800px) {
+    img {
+        width: 600px;
+    }
+}
